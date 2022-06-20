@@ -1,0 +1,66 @@
+body { margin:150px; background-image: url("../images/BACKGROUNDpatFONDO-01-01.jpg"); }
+
+.container {
+  
+  width:1350px;
+  margin: auto;
+}
+
+.barra {
+  background-color:#000000;
+  color: #ffffff;
+  font-size: 40px;
+  height: 40px; width: 250px;
+  border-radius: 20px;
+  border:8px solid yellow;
+}
+#my_canvas{ 
+  background:#000000; 
+    border-radius: 20px;
+    border:10px solid yellow;
+}
+
+.boton{
+    background-image:url("../images/boton1_01.png");
+    background-repeat:no-repeat;
+    height:123px;
+    width:249px;
+    background-position:center;
+    cursor: pointer;
+    border-radius: 8px;
+    border:8px solid blue;
+    padding: 100px,100px;
+  }
+.boton:hover{
+    background-color: yellow;
+    color: #000000;
+}
+.boton2{
+    background-image:url("../images/FIRE-02.png");
+    background-repeat:no-repeat;
+    height:123px;
+    width:123px;
+    background-position:center;
+    cursor: pointer;
+    border-radius: 8px;
+    border:8px solid blue;
+}
+.boton2:hover{
+    background-color: yellow;
+    color: #000000;
+  }
+  .boton3{
+    background-image:url("../images/boton2_02.png");
+    background-repeat:no-repeat;
+    height:123px;
+    width:249px;
+    background-position:center;
+    cursor: pointer;
+    border-radius: 8px;
+    border:8px solid blue;
+}
+.boton3:hover{
+    background-color: yellow;
+    color: #000000;
+  }
+    }
