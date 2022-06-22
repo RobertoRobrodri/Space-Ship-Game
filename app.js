@@ -9,7 +9,7 @@ function initCanvas(){
     // backgroundIMG,BulletsIMG and PlayerIMG
     backgroundImage.src = "images/BACKGROUNDpat2-03.jpg"; //Canvas 
     naveImage.src       = "images/PATO.png"; //Player 
-    bullet.scr          = "images/BULLET.png";//Bullet
+    bullet.scr          = "images/BULLET2.png";//Bullet
     // Enemigos Imgs
     enemiespic1.src     = "images/enemigo3.png";
     enemiespic2.src     = "images/enemigo4.png"; 
@@ -99,12 +99,14 @@ function initCanvas(){
     function Launcher(){
         // bullet location 
         this.y = 750, 
-        this.x = cW*.5-25, 
+        this.x = cW*.5-85, 
         this.w = 100, 
         this.h = 100,   
         this.direccion, 
-        this.bg="blue", // bullet color 
+        this.bg = "blue",
+        this.image = bullet, // bullet color 
         this.misiles = [];
+        this.score = 0;
 
          // Font for gamestatus
          this.gameStatus = {
@@ -143,21 +145,22 @@ function initCanvas(){
                 ctx.font = this.gameStatus.font;
                 ctx.fillText('You win!', cW * .5 - 80, 50);
             }
+
         }
         // Detectar impacto de bullet (bala)
         this.hitDetect = function (m, mi) {
             console.log('crush');
             for (var i = 0; i < enemies.length; i++) {
                 var e = enemies[i];
-                var score = 0;
                 if(m.x+m.w >= e.x && 
                    m.x <= e.x+e.w && 
                    m.y >= e.y && 
                    m.y <= e.y+e.h){
-                    (score = +1);
+                    
+                    (this.score += 1);
                     this.misiles.splice(this.misiles[mi],1); // Remove the missile
                     enemies.splice(i, 1); // Remove the enemy that the missile hit
-                    document.querySelector('.barra').innerHTML = "Score: "+ score+ " ";//Print Score
+                    document.querySelector('.barra').innerHTML = "Score: "+ this.score+ " ";//Print Score
                 }
             }
         }
@@ -210,17 +213,17 @@ function initCanvas(){
         if(event.keyCode == 37) // left arrow
         {
          launcher.direccion = 'left';  
-            if(launcher.x < cW*.2-130){
+            if(launcher.x < 0){
                 launcher.x=0;
                 launcher.direccion = '';
-            }
+            };
        }    
     });
 
     document.addEventListener('keyup', function(event) {
         if(event.keyCode == 37)
         {
-         launcher.x+=0;
+         launcher.x-=0;
          launcher.direccion = '';
         }
     }); 
@@ -230,7 +233,7 @@ function initCanvas(){
         {
          launcher.direccion = 'right';
          if(launcher.x > cW-110){
-            launcher.x-=0;
+            launcher.x= cW-110;
             launcher.direccion = '';
          }
         
@@ -291,7 +294,11 @@ function initCanvas(){
 
     // control buttons
     left_btn.addEventListener('mousedown', function(event) {
-        launcher.direccion = 'left';
+        launcher.direccion = 'left'
+        if(launcher.x < 0){
+                launcher.x=0;
+                launcher.direccion = '';
+            };
     });
 
     left_btn.addEventListener('mouseup', function(event) {
@@ -300,6 +307,10 @@ function initCanvas(){
 
     right_btn.addEventListener('mousedown', function(event) {
         launcher.direccion = 'right';
+        if(launcher.x > cW-110){
+            launcher.x= cW-110;
+            launcher.direccion = '';
+         }
     });
 
     right_btn.addEventListener('mouseup', function(event) {
@@ -307,13 +318,13 @@ function initCanvas(){
     });
     //This code below fires bullets (balas)
     fire_btn.addEventListener('mousedown', function(event) {
-        launcher.misiles.push({x: launcher.x + launcher.w*.7, y: launcher.y, w: 3, h: 10});
+        launcher.misiles.push({x: launcher.x + launcher.w*.7, y: launcher.y, w: 7, h: 14});
     });
     // This fires when clicking on space button from keyboard
     document.addEventListener('keydown', function(event) {
         if(event.keyCode == 32) {
-           launcher.misiles.push({x: launcher.x + launcher.w*.7, y: launcher.y, w: 3,h: 10});
-            //ctx.drawImage(bullet,100,100);
+           launcher.misiles.push({x: launcher.x + launcher.w*.7, y: launcher.y, w: 7, h: 14, image:launcher.image});
+            //ctx.drawImage(naveImage,x.m,y.m,100,100);
         }
     });
 }
